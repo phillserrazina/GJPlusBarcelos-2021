@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Slime.Core
 {
-    public class PlayerManager : CharacterManager
+    public class SlimeManager : CharacterManager
     {
         
     }

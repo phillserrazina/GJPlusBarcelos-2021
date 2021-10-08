@@ -6,8 +6,10 @@ namespace Slime.Core.Components
 {
     public class PlayerMovement : CharacterMovement
     {
+        // VARIABLES
         [SerializeField] private float mouseSensitivity = 5f;
 
+        // METHODS
         protected override void GetInput()
         {
             verticalDirection = Input.GetAxisRaw("Vertical");
