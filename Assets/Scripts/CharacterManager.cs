@@ -13,10 +13,14 @@ namespace Slime.Core
         // EXECUTION FUNCTIONS
         private void Awake() 
         {
+            Initialize();
+        }
+
+        // METHODS
+        protected virtual void Initialize()
+        {
             Movement = GetComponent<CharacterMovement>();
             Movement.Initialize(this);
         }
-
-
     }
 }

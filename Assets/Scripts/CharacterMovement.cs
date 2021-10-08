@@ -9,6 +9,8 @@ namespace Slime.Core.Components
         // VARIABLES
         [SerializeField] protected float movementSpeed = 500f;
 
+        private bool canMove = true;
+
         protected float verticalDirection;
         protected float horizontalDirection;
 
@@ -17,12 +19,16 @@ namespace Slime.Core.Components
         // EXECUTION FUNCTIONS
         private void Update() 
         {
-            GetInput();    
+            if (canMove)
+                GetInput();    
         }
 
         private void FixedUpdate() 
         {
-            Move();    
+            if (canMove)
+                Move();
+            else
+                rb.velocity = Vector3.zero;
         }
 
         // METHODS
@@ -41,6 +47,11 @@ namespace Slime.Core.Components
         protected virtual void Move()
         {
             Debug.LogWarning("CharacterMovement::Move() --- Non-implemented function.");
+        }
+
+        public virtual void SetMovementActive(bool value)
+        {
+            canMove = value;
         }
     }
 }

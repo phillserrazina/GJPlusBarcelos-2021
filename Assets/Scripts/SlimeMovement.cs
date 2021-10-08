@@ -30,5 +30,12 @@ namespace Slime.Core.Components
         {
 
         }
+
+        public override void SetMovementActive(bool value)
+        {
+            base.SetMovementActive(value);
+
+            agent.enabled = value;
+        }
     }
 }
