@@ -7,6 +7,7 @@ namespace Slime.Core.Components
     public class CharacterMovement : CharacterComponent
     {
         // VARIABLES
+        [Header("Settings")]
         [SerializeField] protected float movementSpeed = 500f;
 
         private bool canMove = true;

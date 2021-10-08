@@ -11,6 +11,9 @@ namespace Slime.Core.Components
         [SerializeField] private float mouseSensitivity = 5f;
         [SerializeField] private float mountedTurnedSensitivity = 5f;
 
+        [Header("References")]
+        [SerializeField] private Transform lookAtPivot;
+
         // METHODS
         protected override void GetInput()
         {
@@ -19,11 +22,13 @@ namespace Slime.Core.Components
 
             if (((PlayerManager)manager).Mounted)
             {
+                lookAtPivot.localEulerAngles = Vector3.zero;
                 transform.Rotate(0f, horizontalDirection * mountedTurnedSensitivity * Time.deltaTime, 0f, Space.World);
                 return;
             }
 
-            transform.Rotate(0f, (Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime), 0, Space.World);
+            lookAtPivot.Rotate(0f, 0f, (Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime), Space.World);
+            transform.Rotate(0f, (Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime), 0f, Space.World);
         }
 
         protected override void Move()
