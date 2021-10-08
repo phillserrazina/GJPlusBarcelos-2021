@@ -20,16 +20,16 @@ namespace Slime.Core.Components
         // EXECUTION FUNCTIONS
         private void Update() 
         {
-            if (canMove)
+            if (canMove && GameManager.Instance.IsPlaying)
                 GetInput();    
         }
 
         private void FixedUpdate() 
         {
-            if (canMove)
+            if (canMove && GameManager.Instance.IsPlaying)
                 Move();
             else
-                rb.velocity = Vector3.zero;
+                rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime);
         }
 
         // METHODS

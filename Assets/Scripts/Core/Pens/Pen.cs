@@ -11,6 +11,8 @@ namespace Slime.Core
         [SerializeField] private Material penMaterial;
         public Material PenMaterial => penMaterial;
 
+        public bool Complete => slimesInside.Count == existingSlimes.Count;
+
         private List<SlimeManager> slimesInside = new List<SlimeManager>();
         private List<SlimeManager> existingSlimes = new List<SlimeManager>();
 

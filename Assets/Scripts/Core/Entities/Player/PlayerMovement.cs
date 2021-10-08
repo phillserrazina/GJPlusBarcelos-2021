@@ -8,8 +8,11 @@ namespace Slime.Core.Components
     {
         // VARIABLES
         [SerializeField] private float mountedSpeed = 1000f;
-        [SerializeField] private float mouseSensitivity = 5f;
         [SerializeField] private float mountedTurnedSensitivity = 5f;
+
+        [Space(10)]
+        [SerializeField] private float horizontalMouseSensitivity = 5f;
+        [SerializeField] private float verticalMouseSensitivity = 5f;
 
         [Header("References")]
         [SerializeField] private Transform lookAtPivot;
@@ -27,8 +30,13 @@ namespace Slime.Core.Components
                 return;
             }
 
-            lookAtPivot.Rotate(0f, 0f, (Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime), Space.World);
-            transform.Rotate(0f, (Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime), 0f, Space.World);
+            lookAtPivot.Rotate((Input.GetAxis("Mouse Y") * verticalMouseSensitivity * Time.deltaTime), 0f, 0f, Space.Self);
+
+            //var pivotRotation = lookAtPivot.localEulerAngles;
+            //pivotRotation.x = Mathf.Clamp(pivotRotation.x, 1f, 40f);
+            //lookAtPivot.localEulerAngles = pivotRotation;
+
+            transform.Rotate(0f, (Input.GetAxis("Mouse X") * horizontalMouseSensitivity * Time.deltaTime), 0f, Space.World);
         }
 
         protected override void Move()
