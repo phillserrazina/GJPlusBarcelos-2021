@@ -15,12 +15,14 @@ namespace Slime.Core.Components
                 if (((PlayerManager)manager).Mounted)
                 {
                     MountingManager.Instance.SetAsCurrentSlime(null);
+                    manager.Animation.SetTrigger("Mount");
                 }
 
                 if (currentNearbySlime != null)
                 {
                     MountingManager.Instance.SetAsCurrentSlime(currentNearbySlime);
                     currentNearbySlime = null;
+                    manager.Animation.SetTrigger("Mount");
                 }
             }
 

@@ -20,8 +20,8 @@ namespace Slime.Core.Components
         // METHODS
         protected override void GetInput()
         {
-            verticalDirection = Input.GetAxisRaw("Vertical");
-            horizontalDirection = Input.GetAxisRaw("Horizontal");
+            verticalDirection = Input.GetAxis("Vertical");
+            horizontalDirection = Input.GetAxis("Horizontal");
 
             if (((PlayerManager)manager).Mounted)
             {
@@ -29,6 +29,9 @@ namespace Slime.Core.Components
                 transform.Rotate(0f, horizontalDirection * mountedTurnedSensitivity * Time.deltaTime, 0f, Space.World);
                 return;
             }
+
+            manager.Animation.SetFloat("Vertical", verticalDirection);
+            manager.Animation.SetFloat("Horizontal", horizontalDirection);
 
             lookAtPivot.Rotate((Input.GetAxis("Mouse Y") * verticalMouseSensitivity * Time.deltaTime), 0f, 0f, Space.Self);
 
@@ -50,19 +53,30 @@ namespace Slime.Core.Components
 
         protected override void Move()
         {
+            Vector3 velocity = Vector3.zero;
+
             if (((PlayerManager)manager).Mounted)
             {
-                rb.velocity = transform.forward * mountedSpeed * Time.fixedDeltaTime;
+                velocity = transform.forward * mountedSpeed * Time.fixedDeltaTime;
+                
+                ((SlimeMovement)MountingManager.Instance.CurrentSlime.Movement).ManualMove(velocity);
+
                 return;
             }
 
-            var velocity = ((transform.right * horizontalDirection) + 
+            velocity = ((transform.right * horizontalDirection) + 
                             (transform.forward * verticalDirection)) * 
                             movementSpeed * Time.fixedDeltaTime;
 
             velocity.y = rb.velocity.y;
 
             rb.velocity = velocity;
+        }
+
+        private void LateUpdate() 
+        {
+            if (((PlayerManager)manager).Mounted)
+                transform.position = MountingManager.Instance.CurrentSlime.MountingPoint.position;
         }
     }
 }

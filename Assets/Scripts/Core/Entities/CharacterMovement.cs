@@ -24,7 +24,7 @@ namespace Slime.Core.Components
                 GetInput();    
         }
 
-        private void FixedUpdate() 
+        protected virtual void FixedUpdate() 
         {
             if (canMove && GameManager.Instance.IsPlaying)
                 Move();
