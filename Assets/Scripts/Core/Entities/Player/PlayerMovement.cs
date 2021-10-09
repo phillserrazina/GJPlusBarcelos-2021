@@ -32,9 +32,18 @@ namespace Slime.Core.Components
 
             lookAtPivot.Rotate((Input.GetAxis("Mouse Y") * verticalMouseSensitivity * Time.deltaTime), 0f, 0f, Space.Self);
 
-            //var pivotRotation = lookAtPivot.localEulerAngles;
-            //pivotRotation.x = Mathf.Clamp(pivotRotation.x, 1f, 40f);
-            //lookAtPivot.localEulerAngles = pivotRotation;
+            var pivotRotation = lookAtPivot.localEulerAngles;
+            
+            if (pivotRotation.x > 180 && pivotRotation.x < 340)
+            {
+                pivotRotation.x = 340;
+            }
+            else if (pivotRotation.x < 180 && pivotRotation.x > 40)
+            {
+                pivotRotation.x = 40;
+            }
+
+            lookAtPivot.localEulerAngles = pivotRotation;
 
             transform.Rotate(0f, (Input.GetAxis("Mouse X") * horizontalMouseSensitivity * Time.deltaTime), 0f, Space.World);
         }
