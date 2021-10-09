@@ -25,11 +25,14 @@ namespace Slime.Core
                 CurrentSlime = null;
 
                 player.GetComponent<Rigidbody>().useGravity = true;
+                player.GetComponent<Collider>().enabled = true;
                 
                 return;
             }
 
             CurrentSlime = newSlime;
+
+            player.GetComponent<Collider>().enabled = false;
 
             player.transform.position = CurrentSlime.MountingPoint.position;
             player.GetComponent<Rigidbody>().useGravity = false;

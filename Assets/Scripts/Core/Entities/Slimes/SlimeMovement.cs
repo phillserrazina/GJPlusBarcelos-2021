@@ -9,6 +9,11 @@ namespace Slime.Core.Components
     {
         private NavMeshAgent agent;
 
+        protected override void FixedUpdate()
+        {
+            
+        }
+
         public override void Initialize(CharacterManager manager)
         {
             base.Initialize(manager);
@@ -18,6 +23,9 @@ namespace Slime.Core.Components
 
         protected override void GetInput()
         {
+            if (agent.enabled == false)
+                return;
+            
             if (!agent.hasPath)
             {
                 var newRandomPoint = transform.position + new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
@@ -31,9 +39,17 @@ namespace Slime.Core.Components
 
         }
 
+        public void ManualMove(Vector3 newVelocity)
+        {
+            var velocity = newVelocity;
+            velocity.y = rb.velocity.y;
+
+            rb.velocity = velocity;
+        }
+
         public override void SetMovementActive(bool value)
         {
-            base.SetMovementActive(value);
+            //base.SetMovementActive(value);
 
             agent.enabled = value;
         }

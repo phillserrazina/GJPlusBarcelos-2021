@@ -53,19 +53,30 @@ namespace Slime.Core.Components
 
         protected override void Move()
         {
+            Vector3 velocity = Vector3.zero;
+
             if (((PlayerManager)manager).Mounted)
             {
-                rb.velocity = transform.forward * mountedSpeed * Time.fixedDeltaTime;
+                velocity = transform.forward * mountedSpeed * Time.fixedDeltaTime;
+                
+                ((SlimeMovement)MountingManager.Instance.CurrentSlime.Movement).ManualMove(velocity);
+
                 return;
             }
 
-            var velocity = ((transform.right * horizontalDirection) + 
+            velocity = ((transform.right * horizontalDirection) + 
                             (transform.forward * verticalDirection)) * 
                             movementSpeed * Time.fixedDeltaTime;
 
             velocity.y = rb.velocity.y;
 
             rb.velocity = velocity;
+        }
+
+        private void LateUpdate() 
+        {
+            if (((PlayerManager)manager).Mounted)
+                transform.position = MountingManager.Instance.CurrentSlime.MountingPoint.position;
         }
     }
 }

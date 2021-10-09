@@ -22,10 +22,6 @@ namespace Slime.Core
         {
             if (mounted)
             {
-                var newPos = FindObjectOfType<PlayerManager>().transform.position;
-                newPos.y = transform.position.y;
-                
-                transform.position = newPos;
                 transform.rotation = FindObjectOfType<PlayerManager>().transform.rotation;
             }
         }
