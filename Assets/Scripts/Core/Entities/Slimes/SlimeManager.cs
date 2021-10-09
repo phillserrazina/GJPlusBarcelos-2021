@@ -20,7 +20,10 @@ namespace Slime.Core
         {
             if (mounted)
             {
-                transform.position = FindObjectOfType<PlayerManager>().transform.position + Vector3.down;
+                var newPos = FindObjectOfType<PlayerManager>().transform.position;
+                newPos.y = transform.position.y;
+                
+                transform.position = newPos;
                 transform.rotation = FindObjectOfType<PlayerManager>().transform.rotation;
             }
         }
