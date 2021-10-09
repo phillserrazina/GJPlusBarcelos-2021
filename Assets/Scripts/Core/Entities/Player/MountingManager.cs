@@ -23,13 +23,19 @@ namespace Slime.Core
             {
                 CurrentSlime.Movement.SetMovementActive(true);
                 CurrentSlime = null;
+
+                player.GetComponent<Rigidbody>().useGravity = true;
+                player.GetComponent<Collider>().enabled = true;
                 
                 return;
             }
 
             CurrentSlime = newSlime;
 
+            player.GetComponent<Collider>().enabled = false;
+
             player.transform.position = CurrentSlime.MountingPoint.position;
+            player.GetComponent<Rigidbody>().useGravity = false;
 
             CurrentSlime.Movement.SetMovementActive(false);
         }
