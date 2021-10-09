@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502667, g: 0.37139323, b: 0.49600998, a: 1}
+  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a35222215e90d4f94f0609ff380679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimeMainMaterial: {fileID: 2100000, guid: 56e9c4eec9678c54ab46b3c9e82932ab, type: 2}
+  slimeMainMaterial: {fileID: 2100000, guid: b83d437c7e4b5ac4a98069a0788c9632, type: 2}
   mountingPoint: {fileID: 2045614043}
 --- !u!195 &337108544
 NavMeshAgent:
@@ -5677,6 +5677,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   penMaterial: {fileID: 2100000, guid: 56e9c4eec9678c54ab46b3c9e82932ab, type: 2}
+--- !u!1 &1800297388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1800297390}
+  - component: {fileID: 1800297389}
+  m_Layer: 0
+  m_Name: Paint Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1800297389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800297388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6110ebe06ce664e9c81328d49de1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPaint: 1000
+--- !u!4 &1800297390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800297388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1857073764
 GameObject:
   m_ObjectHideFlags: 0

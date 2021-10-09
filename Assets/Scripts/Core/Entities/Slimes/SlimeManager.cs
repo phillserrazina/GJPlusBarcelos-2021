@@ -10,6 +10,8 @@ namespace Slime.Core
         [SerializeField] private Material slimeMainMaterial;
         [SerializeField] private Transform mountingPoint;
 
+        public TrailRenderer Trail { get; private set; }
+
         public Material SlimeMainMaterial => slimeMainMaterial;
         public Transform MountingPoint => mountingPoint;
 
@@ -26,6 +28,13 @@ namespace Slime.Core
                 transform.position = newPos;
                 transform.rotation = FindObjectOfType<PlayerManager>().transform.rotation;
             }
+        }
+
+        // METHODS
+        protected override void Initialize()
+        {
+            base.Initialize();
+            Trail = GetComponentInChildren<TrailRenderer>();
         }
     }
 }
