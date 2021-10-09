@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Slime.Core;
 
-public class UIManager : MonoBehaviour
+namespace Slime.UI
 {
-    // VARIABLES
-    [SerializeField] private GameObject winScreen;
-    [SerializeField] private GameObject loseScreen;
-
-    // EXECUTION FUNCTIONS
-    private void Start() 
+    public class UIManager : MonoBehaviour
     {
-        GameManager.Instance.OnGameWon += () => { winScreen.SetActive(true); };
-        GameManager.Instance.OnGameLost += () => { loseScreen.SetActive(true); };
+        // EXECUTION FUNCTIONS
+        private void Start() 
+        {
+            GameManager.Instance.OnGameWon += () => { MenuManager.Instance.SetMenuActive("Win Menu"); };
+            GameManager.Instance.OnGameLost += () => { MenuManager.Instance.SetMenuActive("Lose Menu"); };
+            GameManager.Instance.OnGamePaused += isPaused => { MenuManager.Instance.SetMenuActive(isPaused ? "Pause Menu" : null); };
+        }
     }
 }
