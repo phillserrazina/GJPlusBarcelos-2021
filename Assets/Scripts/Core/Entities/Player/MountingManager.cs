@@ -23,6 +23,8 @@ namespace Slime.Core
             {
                 CurrentSlime.Movement.SetMovementActive(true);
                 CurrentSlime = null;
+
+                player.GetComponent<Rigidbody>().useGravity = true;
                 
                 return;
             }
@@ -30,6 +32,7 @@ namespace Slime.Core
             CurrentSlime = newSlime;
 
             player.transform.position = CurrentSlime.MountingPoint.position;
+            player.GetComponent<Rigidbody>().useGravity = false;
 
             CurrentSlime.Movement.SetMovementActive(false);
         }

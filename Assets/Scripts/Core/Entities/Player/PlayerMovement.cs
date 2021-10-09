@@ -20,8 +20,8 @@ namespace Slime.Core.Components
         // METHODS
         protected override void GetInput()
         {
-            verticalDirection = Input.GetAxisRaw("Vertical");
-            horizontalDirection = Input.GetAxisRaw("Horizontal");
+            verticalDirection = Input.GetAxis("Vertical");
+            horizontalDirection = Input.GetAxis("Horizontal");
 
             if (((PlayerManager)manager).Mounted)
             {
@@ -29,6 +29,9 @@ namespace Slime.Core.Components
                 transform.Rotate(0f, horizontalDirection * mountedTurnedSensitivity * Time.deltaTime, 0f, Space.World);
                 return;
             }
+
+            manager.Animation.SetFloat("Vertical", verticalDirection);
+            manager.Animation.SetFloat("Horizontal", horizontalDirection);
 
             lookAtPivot.Rotate((Input.GetAxis("Mouse Y") * verticalMouseSensitivity * Time.deltaTime), 0f, 0f, Space.Self);
 

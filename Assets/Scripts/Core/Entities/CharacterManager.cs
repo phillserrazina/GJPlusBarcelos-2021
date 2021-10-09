@@ -9,6 +9,7 @@ namespace Slime.Core
     {
         // VARIABLES
         public CharacterMovement Movement { get; private set; }
+        public CharacterAnimation Animation { get; private set; }
 
         // EXECUTION FUNCTIONS
         private void Awake() 
@@ -20,7 +21,10 @@ namespace Slime.Core
         protected virtual void Initialize()
         {
             Movement = GetComponent<CharacterMovement>();
+            Animation = GetComponent<CharacterAnimation>();
+
             Movement.Initialize(this);
+            Animation.Initialize(this);
         }
     }
 }
