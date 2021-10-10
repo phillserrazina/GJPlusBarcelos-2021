@@ -8,6 +8,7 @@ namespace Slime.Core
     {
         // VARIABLES
         [SerializeField] private Material slimeMainMaterial;
+        [SerializeField] private ParticleSystem deathFX;
         [SerializeField] private Transform mountingPoint;
 
         public TrailRenderer Trail { get; private set; }
@@ -31,6 +32,15 @@ namespace Slime.Core
         {
             base.Initialize();
             Trail = GetComponentInChildren<TrailRenderer>();
+        }
+
+        public void Kill()
+        {
+            Trail.transform.parent = null;
+            MountingManager.Instance.SetAsCurrentSlime(null);
+            // Instantiate(deathFX, transform.position, Quaternion.identity);
+            // TODO: Play sound
+            Destroy(gameObject);
         }
     }
 }
