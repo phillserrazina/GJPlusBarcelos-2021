@@ -21,6 +21,7 @@ namespace Slime.Core
         public bool Mounted => MountingManager.Instance.CurrentSlime == this;
 
         public Pen Pen { get; private set; }
+        private Pen supposedPen;
 
         // EXECUTION FUNCTIONS
         private void Update() 
@@ -47,6 +48,8 @@ namespace Slime.Core
             
             deathAudioSource.pitch = Random.Range(0.9f, 1.1f);
             deathAudioSource.Play();
+
+            supposedPen.RemoveSlive(this);
             Destroy(gameObject);
         }
 
@@ -54,6 +57,11 @@ namespace Slime.Core
         {
             Pen = pen;
             winSource.Play();
+        }
+
+        public void SetSupposedPen(Pen pen)
+        {
+            supposedPen = pen;
         }
     }
 }

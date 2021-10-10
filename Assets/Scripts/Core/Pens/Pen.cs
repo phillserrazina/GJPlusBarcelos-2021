@@ -8,10 +8,11 @@ namespace Slime.Core
     public class Pen : MonoBehaviour
     {
         // VARIABLES
+        [SerializeField] private int minimumNeededSlimes = 1;
         [SerializeField] private Material penMaterial;
         public Material PenMaterial => penMaterial;
 
-        public bool Complete => slimesInside.Count == existingSlimes.Count;
+        public bool Complete => slimesInside.Count == minimumNeededSlimes;
 
         private List<SlimeManager> slimesInside = new List<SlimeManager>();
         private List<SlimeManager> existingSlimes = new List<SlimeManager>();
@@ -24,12 +25,17 @@ namespace Slime.Core
             GetComponentInChildren<PenDoor>().Initialize(this);
             existingSlimes = FindObjectsOfType<SlimeManager>().Where(slime => slime.SlimeMainMaterial == penMaterial).ToList();
 
+            foreach (var slime in existingSlimes)
+            {
+                slime.SetSupposedPen(this);
+            }
+
             penTextMesh = GetComponentInChildren<TextMesh>();
         }
 
         private void Update() 
         {
-            penTextMesh.text = $"{slimesInside.Count}/{existingSlimes.Count}";
+            penTextMesh.text = $"{slimesInside.Count}/{minimumNeededSlimes}";
         }
 
         // METHODS
@@ -47,5 +53,15 @@ namespace Slime.Core
         }
 
         public bool SlimeIsInside(SlimeManager slime) => slimesInside.Contains(slime);
+
+        public void RemoveSlive(SlimeManager slime)
+        {
+            existingSlimes.Remove(slime);
+
+            if (existingSlimes.Count < minimumNeededSlimes)
+            {
+                GameManager.Instance.OnGameLost?.Invoke();
+            }
+        }
     }
 }

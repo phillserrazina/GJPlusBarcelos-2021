@@ -27,7 +27,8 @@ namespace Slime.Core
         private void Awake()
         {
             Instance = this;
-            OnGameWon += () => { IsPlaying = false; };
+            OnGameWon += EndGame;
+            OnGameLost += EndGame;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -62,8 +63,15 @@ namespace Slime.Core
 
             Time.timeScale = IsPaused ? 0 : 1;
             Cursor.lockState = IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
-            Cursor.visible = !IsPaused;
+            Cursor.visible = IsPaused;
             OnGamePaused?.Invoke(IsPaused);
+        }
+
+        private void EndGame()
+        {
+            IsPlaying = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
