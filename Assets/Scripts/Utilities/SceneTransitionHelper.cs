@@ -10,5 +10,10 @@ namespace Slime.Utilities
         {
             SceneLoader.Instance.LoadSceneAsync(sceneName);
         }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }
