@@ -11,7 +11,8 @@ namespace Slime.Core
             var slime = other.gameObject.GetComponent<SlimeManager>();
             if (slime != null)
             {
-                slime.Kill();
+                if (slime.Mounted)
+                    slime.Kill();
             }    
         }
     }

@@ -14,6 +14,7 @@ namespace Slime.Core.Components
             animator = GetComponentInChildren<Animator>();
         }
 
+        public void SetBool(string parameterName, bool value) => animator.SetBool(parameterName, value);
         public void SetFloat(string parameterName, float value) => animator.SetFloat(parameterName, value);
         public void SetTrigger(string parameterName) => animator.SetTrigger(parameterName);
     }
