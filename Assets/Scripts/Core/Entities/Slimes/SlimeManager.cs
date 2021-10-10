@@ -16,12 +16,14 @@ namespace Slime.Core
         public Material SlimeMainMaterial => slimeMainMaterial;
         public Transform MountingPoint => mountingPoint;
 
-        protected bool mounted => MountingManager.Instance.CurrentSlime == this;
+        public bool Mounted => MountingManager.Instance.CurrentSlime == this;
+
+        public Pen Pen { get; private set; }
 
         // EXECUTION FUNCTIONS
         private void Update() 
         {
-            if (mounted)
+            if (Mounted)
             {
                 transform.rotation = FindObjectOfType<PlayerManager>().transform.rotation;
             }
@@ -38,9 +40,14 @@ namespace Slime.Core
         {
             Trail.transform.parent = null;
             MountingManager.Instance.SetAsCurrentSlime(null);
-            // Instantiate(deathFX, transform.position, Quaternion.identity);
+            Instantiate(deathFX, transform.position, deathFX.transform.rotation);
             // TODO: Play sound
             Destroy(gameObject);
+        }
+
+        public void SetPen(Pen pen)
+        {
+            Pen = pen;
         }
     }
 }

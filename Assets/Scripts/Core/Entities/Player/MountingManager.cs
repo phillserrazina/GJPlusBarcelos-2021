@@ -27,6 +27,7 @@ namespace Slime.Core
             if (newSlime == null)
             {
                 CurrentSlime.Movement.SetMovementActive(true);
+                CurrentSlime.Animation.SetBool("Running", false);
                 CurrentSlime = null;
 
                 player.GetComponent<Rigidbody>().useGravity = true;
@@ -47,6 +48,7 @@ namespace Slime.Core
             player.GetComponent<Rigidbody>().useGravity = false;
 
             player.Animation.SetTrigger("Mount");
+            CurrentSlime.Animation.SetBool("Running", true);
 
             CurrentSlime.Movement.SetMovementActive(false);
             fastMusicSource.volume = 0.1f;

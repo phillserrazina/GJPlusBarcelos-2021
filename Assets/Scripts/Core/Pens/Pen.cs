@@ -36,6 +36,8 @@ namespace Slime.Core
         public void OnSlimeEnter(SlimeManager newSlime)
         {
             slimesInside.Add(newSlime);
+            newSlime.Animation.SetTrigger("Win");
+            MountingManager.Instance.SetAsCurrentSlime(null);
         }
 
         public void OnSlimeExit(SlimeManager newSlime)
