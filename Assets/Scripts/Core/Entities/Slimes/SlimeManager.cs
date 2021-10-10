@@ -11,6 +11,7 @@ namespace Slime.Core
         [SerializeField] private ParticleSystem deathFX;
         [SerializeField] private Transform mountingPoint;
         [SerializeField] private AudioSource deathAudioSource;
+        private AudioSource winSource;
 
         public TrailRenderer Trail { get; private set; }
 
@@ -35,6 +36,7 @@ namespace Slime.Core
         {
             base.Initialize();
             Trail = GetComponentInChildren<TrailRenderer>();
+            winSource = GetComponent<AudioSource>();
         }
 
         public void Kill()
@@ -51,6 +53,7 @@ namespace Slime.Core
         public void SetPen(Pen pen)
         {
             Pen = pen;
+            winSource.Play();
         }
     }
 }
