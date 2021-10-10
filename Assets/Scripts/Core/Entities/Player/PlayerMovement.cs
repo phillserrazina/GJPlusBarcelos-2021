@@ -18,6 +18,11 @@ namespace Slime.Core.Components
         [SerializeField] private Transform lookAtPivot;
 
         // METHODS
+        private void Awake() 
+        {
+            lookAtPivot.eulerAngles = Vector3.zero;    
+        }
+
         protected override void GetInput()
         {
             verticalDirection = Input.GetAxis("Vertical");
