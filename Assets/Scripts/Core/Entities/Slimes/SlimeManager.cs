@@ -10,6 +10,7 @@ namespace Slime.Core
         [SerializeField] private Material slimeMainMaterial;
         [SerializeField] private ParticleSystem deathFX;
         [SerializeField] private Transform mountingPoint;
+        [SerializeField] private AudioSource deathAudioSource;
 
         public TrailRenderer Trail { get; private set; }
 
@@ -41,7 +42,9 @@ namespace Slime.Core
             Trail.transform.parent = null;
             MountingManager.Instance.SetAsCurrentSlime(null);
             Instantiate(deathFX, transform.position, deathFX.transform.rotation);
-            // TODO: Play sound
+            
+            deathAudioSource.pitch = Random.Range(0.9f, 1.1f);
+            deathAudioSource.Play();
             Destroy(gameObject);
         }
 

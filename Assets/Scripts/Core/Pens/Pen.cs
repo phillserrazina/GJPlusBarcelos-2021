@@ -37,6 +37,7 @@ namespace Slime.Core
         {
             slimesInside.Add(newSlime);
             newSlime.Animation.SetTrigger("Win");
+            newSlime.SetPen(this);
             MountingManager.Instance.SetAsCurrentSlime(null);
         }
 
