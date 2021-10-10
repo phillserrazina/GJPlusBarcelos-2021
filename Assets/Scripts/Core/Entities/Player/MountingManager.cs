@@ -6,17 +6,22 @@ namespace Slime.Core
 {
     public class MountingManager : MonoBehaviour
     {
+        // VARIABLES
+        [SerializeField] private AudioSource fastMusicSource;
+
         private PlayerManager player;
         public SlimeManager CurrentSlime { get; private set; }
 
         public static MountingManager Instance { get; private set; }
 
+        // EXECUTION FUNCTIONS
         private void Awake() 
         {
             Instance = this;
             player = FindObjectOfType<PlayerManager>();
         }
 
+        // METHODS
         public void SetAsCurrentSlime(SlimeManager newSlime)
         {
             if (newSlime == null)
@@ -26,7 +31,11 @@ namespace Slime.Core
 
                 player.GetComponent<Rigidbody>().useGravity = true;
                 player.GetComponent<Collider>().enabled = true;
+
+                player.Animation.SetTrigger("Mount");
                 
+                fastMusicSource.volume = 0f;
+
                 return;
             }
 
@@ -37,7 +46,10 @@ namespace Slime.Core
             player.transform.position = CurrentSlime.MountingPoint.position;
             player.GetComponent<Rigidbody>().useGravity = false;
 
+            player.Animation.SetTrigger("Mount");
+
             CurrentSlime.Movement.SetMovementActive(false);
+            fastMusicSource.volume = 0.1f;
         }
     }
 }
